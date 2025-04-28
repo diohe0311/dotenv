@@ -1,0 +1,32 @@
+# This file configures Sourcecraft.
+
+name: diohe-staging-dotenv
+version: v1.0.0
+base: ubuntu@24.04
+license: BSD-1-Clause
+title: Dotenv (diohe-staging)
+summary: Dotenv loads environment variables from a .env file for app configuration.
+description: |
+  Dotenv is a package that reads key-value pairs from a .env file and sets them as environment variables, 
+  supporting 12-factor app principles.
+
+platforms:
+  amd64:
+
+parts:
+  setuptools:
+    plugin: python
+    python-packages: []
+    source: sourcecraft:python-setuptools-sd
+    source-channel: latest/edge
+    build-environment:
+      - PIP_NO_INDEX: "1"
+
+  python-dotenv:
+    after:
+      - setuptools
+    plugin: python
+    python-packages: []
+    source: .
+    build-environment:
+      - PIP_NO_INDEX: '1'
